@@ -1,0 +1,19 @@
+# Sadržaj za glavni .gitignore u WEATHER-ASSISTANT folderu
+
+# Zanemari datoteke iz Backend-a
+/backend/venv/
+/backend/__pycache__/
+/backend/.env
+
+# Zanemari datoteke iz Frontend-a (kombinacija defaultnog i našeg)
+/frontend/node_modules/
+/frontend/build/
+/frontend/.pnp
+/frontend/.pnp.js
+/frontend/coverage/
+
+# Misc
+.DS_Store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
