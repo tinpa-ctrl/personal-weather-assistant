@@ -1,29 +1,24 @@
 # ==============================================================================
 # === 1. UVOZ POTREBNIH BIBLIOTEKA (ALATA) ===
 # ==============================================================================
-# Uvozimo sve "alate" koji će nam trebati za rad. Svaki ima svoju specifičnu namjenu.
 
-import os  # Omogućuje nam čitanje varijabli iz operativnog sustava (npr. API ključeva).
-from dotenv import load_dotenv  # Specifično za učitavanje naših tajnih ključeva iz .env datoteke.
-from flask import Flask, request, jsonify  # Osnovni alati iz Flask biblioteke za izradu web servera.
-                                           # Flask - glavni objekt aplikacije.
-                                           # request - za čitanje podataka koje nam šalje frontend.
-                                           # jsonify - za pretvaranje Python rječnika u ispravan JSON format.
-from flask_cors import CORS  # Omogućuje da naš frontend (koji radi na portu 3000) može slati zahtjeve našem backendu (koji radi na portu 5000).
-import requests  # Biblioteka za slanje HTTP zahtjeva drugim API-jima (u našem slučaju OpenWeatherMap).
-from groq import Groq  # Službena Groq biblioteka za komunikaciju s njihovim AI modelima.
-from datetime import datetime, date, timedelta  # Jako važno! Alati za rad s datumima i vremenom.
-                                                # Omogućuju nam pretvaranje teksta u datume, uspoređivanje datuma itd.
+
+import os
+from dotenv import load_dotenv
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+import requests
+from groq import Groq
+from datetime import datetime, date, timedelta
 
 # ==============================================================================
 # === 2. INICIJALIZACIJA I KONFIGURACIJA ===
 # ==============================================================================
-# Ovdje postavljamo temelje naše aplikacije.
 
 # Učitaj varijable iz .env datoteke (OPENWEATHERMAP_API_KEY i GROQ_API_KEY)
 load_dotenv()
 
-# Kreiraj instancu naše Flask web aplikacije.
+# Kreiraj instancu Flask web aplikacije.
 app = Flask(__name__)
 
 # Omogući CORS za cijelu aplikaciju. Ovo je kao da kažemo: "Vrata su otvorena za zahtjeve s drugih domena."
@@ -33,15 +28,13 @@ CORS(app)
 OPENWEATHERMAP_API_KEY = os.getenv("OPENWEATHERMAP_API_KEY")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
-# Kreiraj "klijenta" za komunikaciju s Groq-om. Ovaj objekt će imati metode za slanje zahtjeva AI modelu.
+# Kreiraj "klijenta" za komunikaciju s Groq-om
 groq_client = Groq(api_key=GROQ_API_KEY)
 
 
 # ==============================================================================
 # === 3. GLAVNA LOGIKA: DOHVAĆANJE VREMENSKIH PODATAKA ===
 # ==============================================================================
-# Ova funkcija je "mozak" za dohvaćanje vremena. Postala je pametnija jer sada zna
-# rukovati s današnjim danom i budućim danima na različite načine.
 
 def get_weather_data(city, target_date_str):
     """Dohvaća vremenske podatke ovisno o tome je li traženi datum danas ili u budućnosti."""
@@ -92,7 +85,6 @@ def get_weather_data(city, target_date_str):
                         best_entry = entry  # ... to je naš idealan kandidat!
                         break  # Pronašli smo ga, nema potrebe dalje tražiti.
 
-            # REZERVNI PLAN: Što ako nema unosa točno za podne? (npr. za peti dan u budućnosti)
             # Ako nismo našli unos za podne, jednostavno ćemo uzeti PRVI dostupni unos za taj dan.
             if not best_entry:
                  for entry in forecast_data.get('list', []):
@@ -162,11 +154,10 @@ def get_ai_recommendations(weather_data, target_date_str):
 
 
 # ==============================================================================
-# === 5. API ENDPOINT - "VRATA" NAŠE APLIKACIJE ===
+# === 5. API ENDPOINT ===
 # ==============================================================================
 # Ovo je jedina točka kroz koju naš frontend komunicira s backendom.
-# Ona se ponaša kao "kontrolor prometa": prima zahtjev, poziva druge funkcije da obave posao
-# i na kraju šalje formatirani odgovor natrag.
+
 
 @app.route('/api/weather-recommendation', methods=['POST'])
 def weather_recommendation():
