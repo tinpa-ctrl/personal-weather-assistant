@@ -54,7 +54,7 @@ venv\Scripts\activate
 # 3. Instalirajte sve potrebne Python pakete
 pip install -r requirements.txt
 ```
-# 4. Kreirajte .env datoteku za API ključeve
+#### 4. Kreirajte .env datoteku za API ključeve
 U 'backend' folderu napravite novu datoteku pod nazivom '.env'
 i u nju dodajte svoje API ključeve u sljedećem formatu:
 OPENWEATHERMAP_API_KEY=vas_openweathermap_kljuc
@@ -81,7 +81,7 @@ Terminal 1: Pokretanje Backenda
 # Provjerite je li virtualno okruženje (venv) aktivirano
 flask run
 ```
-# Backend server će se pokrenuti na http://127.0.0.1:5000
+Backend server će se pokrenuti na http://127.0.0.1:5000
 
 Terminal 2: Pokretanje Frontenda
 
@@ -89,7 +89,7 @@ Terminal 2: Pokretanje Frontenda
 # Provjerite jeste li u /frontend direktoriju
 npm start
 ```
-# Frontend aplikacija će se automatski otvoriti u pregledniku na http://localhost:3000
+Frontend aplikacija će se automatski otvoriti u pregledniku na http://localhost:3000
 
 
 ### 6.Testiranje Funkcionalnosti (Primjer Korištenja)
