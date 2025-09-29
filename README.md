@@ -1,70 +1,104 @@
-# Getting Started with Create React App
+# Personal Weather Assistant
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Ova aplikacija služi kao osobni vremenski asistent koji kombinira stvarne vremenske podatke s AI analizom kako bi pružio personalizirane preporuke. Korisnik može unijeti grad i datum, a aplikacija će vratiti korisne savjete o odjeći, aktivnostima i drugim relevantnim informacijama temeljenim na prognozi.
 
-## Available Scripts
+##  Ključne Funkcionalnosti
 
-In the project directory, you can run:
+-   **Unos Podataka:** Jednostavno sučelje za unos grada i datuma.
+-   **Dohvaćanje Podataka:** Integracija s OpenWeatherMap API-jem za dobivanje točnih vremenskih podataka (trenutno vrijeme ili prognoza za 5 dana).
+-   **AI Analiza:** Korištenje Groq API-ja za slanje vremenskih podataka jezičnom modelu (LLM) na analizu.
+-   **Personalizirane Preporuke:** AI generira sažete i korisne preporuke za odjeću, aktivnosti na otvorenom/zatvorenom i općenite savjete.
+-   **Korisničko Sučelje:** Čist i responzivan frontend izrađen u Reactu.
 
-### `npm start`
+## Korištene Tehnologije
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+| Kategorija | Tehnologija                                       |
+| :--------- | :------------------------------------------------ |
+| **Backend**  | Python, Flask                                   |
+| **Frontend** | React.js, CSS                                   |
+| **API-ji**   | OpenWeatherMap API, Groq API                    |
+| **Alati**    | Git, npm, pip (venv)                            |
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## Instalacija i Pokretanje Projekta
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Za uspješno pokretanje aplikacije, potrebno je slijediti korake za postavljanje i pokretanje backenda i frontenda odvojeno.
 
-### `npm run build`
+### 1. Preduvjeti
+Provjerite imate li instalirano sljedeće:
+-   Python 3.8+
+-   Node.js v16+ (sa npm-om)
+-   Git
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 2. Postavljanje Projekta
+Prvo, klonirajte repozitorij na svoje računalo.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+git clone https://github.com/tinpa-ctrl/personal-weather-assistant.git
+cd personal-weather-assistant
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 3. Backend Setup
+Backend server je odgovoran za komunikaciju s vanjskim API-jima.
 
-### `npm run eject`
+```bash
+# 1. Navigirajte u backend direktorij
+cd backend
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# 2. Kreirajte i aktivirajte virtualno okruženje
+# Na Windowsu:
+python -m venv venv
+venv\Scripts\activate
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# 3. Instalirajte sve potrebne Python pakete
+pip install -r requirements.txt
+```
+# 4. Kreirajte .env datoteku za API ključeve
+U 'backend' folderu napravite novu datoteku pod nazivom '.env'
+i u nju dodajte svoje API ključeve u sljedećem formatu:
+OPENWEATHERMAP_API_KEY=vas_openweathermap_kljuc
+GROQ_API_KEY=vas_groq_kljuc
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 4. Frontend Setup
+Frontend aplikacija pruža korisničko sučelje.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+# 1. Iz glavnog direktorija, navigirajte u frontend
+cd ../frontend
 
-## Learn More
+# 2. Instalirajte sve potrebne Node.js pakete
+npm install
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 5.Pokretanje Aplikacije
+Za rad aplikacije, oba servera (backend i frontend) moraju biti pokrenuta istovremeno. To zahtijeva korištenje dva odvojena terminala/CMD prozora.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Terminal 1: Pokretanje Backenda
 
-### Code Splitting
+```bash
+# Provjerite jeste li u /backend direktoriju
+# Provjerite je li virtualno okruženje (venv) aktivirano
+flask run
+```
+# Backend server će se pokrenuti na http://127.0.0.1:5000
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Terminal 2: Pokretanje Frontenda
 
-### Analyzing the Bundle Size
+```bash
+# Provjerite jeste li u /frontend direktoriju
+npm start
+```
+# Frontend aplikacija će se automatski otvoriti u pregledniku na http://localhost:3000
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+### 6.Testiranje Funkcionalnosti (Primjer Korištenja)
+Nakon što su oba servera pokrenuta:
+Otvorite web preglednik i posjetite http://localhost:3000.
+U polje za grad unesite Zagreb.
+Odaberite željeni datum pomoću alata za odabir datuma.
+Kliknite na gumb "Dohvati preporuke".
+Očekivani rezultat: Nakon kratkog čekanja, na stranici će se pojaviti tekstualna preporuka generirana od strane AI-ja, prilagođena vremenskim uvjetima za odabrani grad i datum.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Razvio: Tin Paviša
