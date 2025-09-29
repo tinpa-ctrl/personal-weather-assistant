@@ -101,4 +101,10 @@ Kliknite na gumb "Dohvati preporuke".
 Očekivani rezultat: Nakon kratkog čekanja, na stranici će se pojaviti tekstualna preporuka generirana od strane AI-ja, prilagođena vremenskim uvjetima za odabrani grad i datum.
 
 
+### Primjer Korištenja
+
+![Primjer rada aplikacije](primjer.gif)
+
+
+
 Razvio: Tin Paviša
