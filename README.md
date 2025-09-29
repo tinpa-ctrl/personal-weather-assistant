@@ -92,7 +92,7 @@ npm start
 Frontend aplikacija će se automatski otvoriti u pregledniku na http://localhost:3000
 
 
-### 6.Testiranje Funkcionalnosti (Primjer Korištenja)
+### 6.Testiranje Funkcionalnosti
 Nakon što su oba servera pokrenuta:
 Otvorite web preglednik i posjetite http://localhost:3000.
 U polje za grad unesite Zagreb.
